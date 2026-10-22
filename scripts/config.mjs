@@ -35,8 +35,8 @@ export function resolveBuildOptions(env = process.env) {
     localFallback,
     preview,
     verification: {
-      'google-site-verification': env.GOOGLE_SITE_VERIFICATION?.trim(),
-      'msvalidate.01': env.BING_SITE_VERIFICATION?.trim(),
+      'google-site-verification': env.GOOGLE_SITE_VERIFICATION?.trim() || 'GhjFwCw0EoV6XPRbVBUoRQVXiwJSY36bdSlTpbGitXc',
+      'msvalidate.01': env.BING_SITE_VERIFICATION?.trim() || 'BA3F528E1E2EEDBF25295180984F5D74',
     },
   };
 }

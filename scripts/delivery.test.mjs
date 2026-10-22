@@ -37,7 +37,7 @@ test('默认读取进程环境，显式 env 对象不继承宿主生产变量', 
     assert.equal(resolveBuildOptions().siteUrl, 'https://host-production.example.com');
     assert.equal(resolveBuildOptions().noindex, false);
     assert.equal(resolveBuildOptions({}).siteUrl, 'http://localhost:4173');
-    assert.equal(resolveBuildOptions({}).verification['google-site-verification'], undefined);
+    assert.equal(resolveBuildOptions({}).verification['google-site-verification'], 'GhjFwCw0EoV6XPRbVBUoRQVXiwJSY36bdSlTpbGitXc');
     const preview = resolveBuildOptions({ VERCEL_ENV: 'preview', VERCEL_PROJECT_PRODUCTION_URL: 'preview-target.example.com' });
     assert.equal(preview.siteUrl, 'https://preview-target.example.com');
     assert.equal(preview.noindex, true);

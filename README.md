@@ -65,6 +65,8 @@ Vercel 配置和系统域名选择依据：[vercel.json 文档](https://vercel.c
 
 ### 验证站点与提交 Sitemap
 
+当前已内置本项目提供的 Google 与 Bing 站点验证值，构建会将两个验证 meta 标签写入所有页面的 `<head>`，无需额外设置环境变量。以后更换验证值时，可以设置下面的环境变量覆盖默认值；每种验证标签只生成一次。
+
 1. 在 [Google Search Console](https://search.google.com/search-console/) 添加站点。自定义域名可采用 DNS 验证；URL 前缀属性选择 HTML 标签验证时，把 `content` 中的验证值填入 Vercel 环境变量 `GOOGLE_SITE_VERIFICATION`，不要粘贴整个 `<meta>` 标签。
 2. 在 [Bing Webmaster Tools](https://www.bing.com/webmasters/) 添加站点。使用 HTML meta 验证时，把 `msvalidate.01` 的 `content` 值填入 `BING_SITE_VERIFICATION`。
 3. 添加或修改验证变量后重新部署，在页面源代码中确认标签出现，然后在对应站长工具中完成验证。
