@@ -2,6 +2,8 @@
 
 这是一个独立的中文 WhatsApp Web 使用指南与入口导航站。页面为 HTML5 + CSS + 少量原生 JavaScript，正文直接存在于 HTML 中；不依赖 React、数据库、服务端函数或客户端渲染。Node.js 仅用于构建与本地验收，部署后的文件全部为静态文件。
 
+正式站点地址为 **[https://whatsp.vercel.app](https://whatsp.vercel.app/)**。Vercel 构建默认使用该地址生成 canonical、分享元数据、结构化数据和 Sitemap，不再跟随 Vercel 自动选择的项目别名。
+
 本站使用 WhatsApp 品牌图标辨识产品，入口直接前往 `https://web.whatsapp.com/`，与 WhatsApp / Meta 无隶属、授权或运营关系；实际登录和设备关联均在官方服务完成。
 
 ## 页面与文件
@@ -37,28 +39,29 @@ npm test
 
 `check` 验证构建产物的 H1、唯一标题/描述、中文语言属性、canonical、JSON-LD、页面/资源/锚点链接、站点地图与抓取设置。`test` 使用隔离临时目录检查生产与预览构建、域名优先级、验证标签、clean URL、404与HTTP方法；不会改写源 HTML 或当前 `dist/`。这些检查不等同于 W3C 全量 HTML 校验、在线搜索引擎审核或 Vercel 生产验收。
 
-未配置域名的本地构建会明确输出提示，使用 `http://localhost:4173` 并设置 `noindex`，适合预览。不要将这份本地产物直接当作正式域名构建上传。
+未设置环境变量的本地构建会明确输出提示，使用 `http://localhost:4173` 并设置 `noindex`，适合预览。不要将这份本地产物直接当作正式域名构建上传。
 
-## 部署到 Vercel（当前无自定义域名也可部署）
+## 部署到 Vercel
 
 1. 把整个源码目录上传到自己的 GitHub / GitLab / Bitbucket 仓库，在 Vercel 新建项目并导入仓库。也可以使用已登录的 Vercel CLI 从源码根目录部署。
 2. 项目根目录选择本目录，Framework Preset 选择 **Other**；Node.js 选择 **22.x 或以上受支持版本**。
 3. 本项目的 `vercel.json` 已声明 **Build Command：`npm run build`**、**Output Directory：`dist`**、`cleanUrls: true`、`trailingSlash: false`。保留这些值，不要把输出目录改成源码根目录。
-4. 在 Vercel 项目环境变量设置中启用 **Enable access to System Environment Variables**。未设定 `SITE_URL` 时，构建会使用 `VERCEL_PROJECT_PRODUCTION_URL` 指定的稳定生产域名，例如项目的 `*.vercel.app`。它不使用每次变化的预览部署 URL。
-5. 点击 Deploy。打开生产网址，检查上表中的 7 个内容页，以及 `/sitemap.xml`、`/robots.txt`；再打开一个不存在的路径确认返回404。
+4. 在 Vercel 项目的 Domains 中确认 `whatsp.vercel.app` 已绑定到该项目的 Production 环境；仅修改代码中的域名不会自动完成绑定。在项目环境变量设置中保留 **Enable access to System Environment Variables**，以便构建区分生产与预览环境。
+5. `SITE_URL` 可以不设置，Vercel 构建默认采用 `https://whatsp.vercel.app`。如果项目已有指向其他域名的 `SITE_URL`，将 Production 与 Preview 的值改为 `https://whatsp.vercel.app`，或者删除这些旧值。`VERCEL_PROJECT_PRODUCTION_URL` 和临时部署 URL 不参与域名选择。
+6. 点击 Deploy。打开 [正式首页](https://whatsp.vercel.app/)，检查上表中的 7 个内容页，以及 [Sitemap](https://whatsp.vercel.app/sitemap.xml)、[robots.txt](https://whatsp.vercel.app/robots.txt)；再打开一个不存在的路径确认返回404。
 
-Vercel 配置和系统域名选择依据：[vercel.json 文档](https://vercel.com/docs/project-configuration/vercel-json)、[系统环境变量文档](https://vercel.com/docs/environment-variables/system-environment-variables#vercel_project_production_url)。未提供正式域名且无法读取 Vercel 系统域名时，构建会明确失败，避免把 localhost 写入线上 SEO 元数据。
+Vercel 配置与环境区分依据：[vercel.json 文档](https://vercel.com/docs/project-configuration/vercel-json)、[系统环境变量文档](https://vercel.com/docs/environment-variables/system-environment-variables)。生产与预览构建默认使用代码中固定的正式地址，不需要提供 `VERCEL_PROJECT_PRODUCTION_URL`。构建会拒绝用于线上部署的 localhost、非 HTTPS 地址和带路径或查询参数的 `SITE_URL`。
 
 404由输出目录中的 `404.html` 自动提供，没有把所有不存在的 URL 重写到首页。实现依据：[Vercel 自定义404页面](https://vercel.com/kb/guide/custom-404-page)。
 
-## 确定自定义域名后
+## 以后迁移到其他域名
 
 1. 在 Vercel 项目的 Domains 中添加自己的域名，并按该项目提供的 DNS 记录完成绑定。
 2. 在项目环境变量中添加 `SITE_URL`，值为完整 HTTPS origin，例如 `https://your-domain.com`。不要加页面路径、参数或片段。建议 Production 与 Preview 均填正式域名。
 3. 重新部署。构建会统一更新 canonical、Open Graph URL、JSON-LD 和 Sitemap。若有多个域名，把其他域名在 Vercel 中重定向到选定主域名，避免多个生产入口重复收录。
-4. 域名更换后，重新检查页面源代码与 Sitemap，更新站长工具中的站点属性并提交新 Sitemap。
+4. 域名更换后，重新检查所有 8 个 HTML 页面的 canonical；7 个内容页的 Open Graph URL、JSON-LD 和 Sitemap 地址也应采用新域名。确认正式首页的 robots meta 不含 `noindex`，`robots.txt` 中的 Sitemap 地址正确，再更新站长工具中的站点属性并提交新 Sitemap。
 
-域名取值优先级：`SITE_URL` → `VERCEL_PROJECT_PRODUCTION_URL` → 仅本地使用 `http://localhost:4173`。部署到 Vercel 时要求 HTTPS。所有 `{{SITE_URL}}`、`{{ROBOTS}}`、`{{SITE_VERIFICATION}}` 都在构建时替换，因此应部署构建后的 `dist/`，不要直接发布带占位符的源码 HTML。
+域名取值优先级：显式 `SITE_URL` → Vercel 环境默认 `https://whatsp.vercel.app` → 本地无配置时使用 `http://localhost:4173`。部署到 Vercel 时要求 HTTPS；Preview 使用相同正式 canonical，但所有页面保持 `noindex`。所有 `{{SITE_URL}}`、`{{ROBOTS}}`、`{{SITE_VERIFICATION}}` 都在构建时替换，因此应部署构建后的 `dist/`，不要直接发布带占位符的源码 HTML。
 
 ## Google 与 Bing SEO
 
@@ -73,14 +76,14 @@ Vercel 配置和系统域名选择依据：[vercel.json 文档](https://vercel.c
 1. 在 [Google Search Console](https://search.google.com/search-console/) 添加站点。自定义域名可采用 DNS 验证；URL 前缀属性选择 HTML 标签验证时，把 `content` 中的验证值填入 Vercel 环境变量 `GOOGLE_SITE_VERIFICATION`，不要粘贴整个 `<meta>` 标签。
 2. 在 [Bing Webmaster Tools](https://www.bing.com/webmasters/) 添加站点。使用 HTML meta 验证时，把 `msvalidate.01` 的 `content` 值填入 `BING_SITE_VERIFICATION`。
 3. 添加或修改验证变量后重新部署，在页面源代码中确认标签出现，然后在对应站长工具中完成验证。
-4. 向两家站长工具提交 `https://你的正式域名/sitemap.xml`。逐页使用 URL 检查工具核对抓取、canonical、索引状态。
+4. 向两家站长工具提交 [https://whatsp.vercel.app/sitemap.xml](https://whatsp.vercel.app/sitemap.xml)。逐页使用 URL 检查工具核对抓取、canonical、索引状态；首页的规范地址应为 `https://whatsp.vercel.app/`。
 5. 后续更新真实有用的指南内容，确保官方参考链接有效；不要为了虚假“新鲜度”批量修改日期。Sitemap 当前省略 `lastmod`，避免把每次构建时间当成内容修改时间。
 
 可选环境变量一览：
 
 | 名称 | 值与用途 |
 | --- | --- |
-| `SITE_URL` | 选定主站地址，例如 `https://your-domain.com`；未确定域名时可暂不设置 |
+| `SITE_URL` | 可选的正式域名覆盖值；Vercel 中不设置时采用 `https://whatsp.vercel.app`，以后迁移可改为新 HTTPS origin |
 | `GOOGLE_SITE_VERIFICATION` | Google 的 HTML 验证 token，可不填 |
 | `BING_SITE_VERIFICATION` | Bing 的 HTML 验证 token，可不填 |
 | `PORT` / `HOST` | 仅本地预览使用，默认 `4173` / `127.0.0.1` |

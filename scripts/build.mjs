@@ -1,11 +1,11 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { root, pages, resolveBuildOptions, escapeMarkup } from './config.mjs';
+import { root, pages, productionSiteUrl, resolveBuildOptions, escapeMarkup } from './config.mjs';
 
 export async function buildSite({ source = root, output = path.join(root, 'dist'), env = process.env, quiet = false } = {}) {
   const options = resolveBuildOptions(env);
-  if (options.localFallback && !quiet) console.warn('[本地预览] 尚未配置域名，使用 http://localhost:4173；此构建 noindex。Vercel 会自动读取项目正式域名。');
+  if (options.localFallback && !quiet) console.warn(`[本地预览] 使用 http://localhost:4173 并设置 noindex；Vercel 正式构建默认使用 ${productionSiteUrl}。`);
   const htmlSources = await Promise.all(pages.map(async page => ({ ...page, html: await fs.readFile(path.join(source, page.file), 'utf8') })));
   await fs.access(path.join(source, 'assets'));
   const outputPath = path.resolve(output);

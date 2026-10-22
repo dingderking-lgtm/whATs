@@ -8,20 +8,25 @@ import { buildSite } from './build.mjs';
 import { checkSite } from './check.mjs';
 import { createPreviewServer } from './serve.mjs';
 
-test('未定域名：本地 noindex，生产采用稳定 Vercel 域名，自定义域名优先', () => {
+test('正式域名固定为 whatsp.vercel.app，旧 Vercel 别名不能改写 canonical，SITE_URL 可覆盖', () => {
   assert.deepEqual({ url: resolveBuildOptions({}).siteUrl, noindex: resolveBuildOptions({}).noindex }, { url: 'http://localhost:4173', noindex: true });
-  const production = resolveBuildOptions({ VERCEL: '1', VERCEL_ENV: 'production', VERCEL_PROJECT_PRODUCTION_URL: 'my-guide.vercel.app', VERCEL_URL: 'ephemeral-123.vercel.app' });
-  assert.equal(production.siteUrl, 'https://my-guide.vercel.app');
+  const production = resolveBuildOptions({ VERCEL: '1', VERCEL_ENV: 'production', VERCEL_PROJECT_PRODUCTION_URL: 'whats-ruddy.vercel.app', VERCEL_URL: 'ephemeral-123.vercel.app' });
+  assert.equal(production.siteUrl, 'https://whatsp.vercel.app');
   assert.equal(production.noindex, false);
-  assert.equal(resolveBuildOptions({ SITE_URL: 'https://guide.example.com/', VERCEL_PROJECT_PRODUCTION_URL: 'old.vercel.app' }).siteUrl, 'https://guide.example.com');
-  assert.equal(resolveBuildOptions({ VERCEL_ENV: 'preview', VERCEL_PROJECT_PRODUCTION_URL: 'my-guide.vercel.app' }).noindex, true);
+  assert.equal(resolveBuildOptions({ VERCEL: '1', VERCEL_ENV: 'production' }).siteUrl, 'https://whatsp.vercel.app');
+  assert.equal(resolveBuildOptions({ VERCEL: '1', VERCEL_ENV: 'production', SITE_URL: 'https://guide.example.com/', VERCEL_PROJECT_PRODUCTION_URL: 'old.vercel.app' }).siteUrl, 'https://guide.example.com');
+  const preview = resolveBuildOptions({ VERCEL_ENV: 'preview', VERCEL_PROJECT_PRODUCTION_URL: 'whats-ruddy.vercel.app' });
+  assert.equal(preview.siteUrl, 'https://whatsp.vercel.app');
+  assert.equal(preview.noindex, true);
+  const customPreview = resolveBuildOptions({ VERCEL_ENV: 'preview', SITE_URL: 'https://guide.example.com' });
+  assert.equal(customPreview.siteUrl, 'https://guide.example.com');
+  assert.equal(customPreview.noindex, true);
 });
 
-test('阻止错误 canonical 配置和无正式域名的 Vercel 构建', () => {
-  for (const SITE_URL of ['javascript:alert(1)', 'https://example.com/subpath', 'https://example.com/?q=1', 'https://user:password@example.com', 'http://example.com']) {
+test('阻止非法 canonical 地址和线上 localhost 配置', () => {
+  for (const SITE_URL of ['not-a-url', 'javascript:alert(1)', 'https://example.com/subpath', 'https://example.com/?q=1', 'https://example.com/#fragment', 'https://user:password@example.com', 'http://example.com']) {
     assert.throws(() => resolveBuildOptions({ SITE_URL }), undefined, SITE_URL);
   }
-  assert.throws(() => resolveBuildOptions({ VERCEL: '1', VERCEL_ENV: 'production' }), /缺少正式域名/);
   assert.throws(() => resolveBuildOptions({ VERCEL: '1', VERCEL_ENV: 'production', SITE_URL: 'http://localhost:4173' }), /公开的 HTTPS/);
 });
 
@@ -39,7 +44,7 @@ test('默认读取进程环境，显式 env 对象不继承宿主生产变量', 
     assert.equal(resolveBuildOptions({}).siteUrl, 'http://localhost:4173');
     assert.equal(resolveBuildOptions({}).verification['google-site-verification'], 'GhjFwCw0EoV6XPRbVBUoRQVXiwJSY36bdSlTpbGitXc');
     const preview = resolveBuildOptions({ VERCEL_ENV: 'preview', VERCEL_PROJECT_PRODUCTION_URL: 'preview-target.example.com' });
-    assert.equal(preview.siteUrl, 'https://preview-target.example.com');
+    assert.equal(preview.siteUrl, 'https://whatsp.vercel.app');
     assert.equal(preview.noindex, true);
   } finally {
     for (const key of keys) {
@@ -58,11 +63,18 @@ test('真实 HTML 的生产与预览产物、验证标签、clean URL 及404行�
   for (const page of pages) await fs.copyFile(path.join(root, page.file), path.join(workspace, page.file));
   await fs.cp(path.join(root, 'assets'), path.join(workspace, 'assets'), { recursive: true });
   const output = path.join(workspace, 'dist');
-  await buildSite({ source: workspace, output, env: { VERCEL: '1', VERCEL_ENV: 'production', VERCEL_PROJECT_PRODUCTION_URL: 'test-guide.vercel.app', GOOGLE_SITE_VERIFICATION: 'google-token', BING_SITE_VERIFICATION: 'bing-token' }, quiet: true });
+  await buildSite({ source: workspace, output, env: { VERCEL: '1', VERCEL_ENV: 'production', VERCEL_PROJECT_PRODUCTION_URL: 'whats-ruddy.vercel.app', VERCEL_URL: 'ephemeral-123.vercel.app', GOOGLE_SITE_VERIFICATION: 'google-token', BING_SITE_VERIFICATION: 'bing-token' }, quiet: true });
   const production = await checkSite(output, { quiet: true });
   assert.equal(production.noindex, false);
+  assert.equal(production.origin, 'https://whatsp.vercel.app');
+  assert.equal(production.pages, 8);
+  const sitemapUrls = [...(await fs.readFile(path.join(output, 'sitemap.xml'), 'utf8')).matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
+  assert.deepEqual(sitemapUrls, ['/', '/guide', '/troubleshooting', '/messages-files', '/web-vs-desktop', '/about', '/privacy'].map(route => `https://whatsp.vercel.app${route}`));
+  assert.match(await fs.readFile(path.join(output, 'robots.txt'), 'utf8'), /Sitemap: https:\/\/whatsp\.vercel\.app\/sitemap\.xml/);
   for (const page of pages) {
     const html = await fs.readFile(path.join(output, page.file), 'utf8');
+    assert.ok(html.includes(`<link rel="canonical" href="https://whatsp.vercel.app${page.route}">`), `${page.file}: 正式 canonical`);
+    assert.doesNotMatch(html, /whats-ruddy\.vercel\.app|ephemeral-123\.vercel\.app/, `${page.file}: 不能残留旧域名或预览地址`);
     assert.equal([...html.matchAll(/name="google-site-verification" content="google-token"/g)].length, 1, `${page.file}: Google 验证标签`);
     assert.equal([...html.matchAll(/name="msvalidate.01" content="bing-token"/g)].length, 1, `${page.file}: Bing 验证标签`);
   }
@@ -91,16 +103,24 @@ test('真实 HTML 的生产与预览产物、验证标签、clean URL 及404行�
   assert.equal(head.status, 200);
   assert.equal(await head.text(), '');
   assert.equal((await fetch(`${base}/`, { method: 'POST' })).status, 405);
-  await buildSite({ source: workspace, output, env: { VERCEL: '1', VERCEL_ENV: 'preview', VERCEL_PROJECT_PRODUCTION_URL: 'test-guide.vercel.app' }, quiet: true });
-  assert.equal((await checkSite(output, { quiet: true })).noindex, true);
+  await buildSite({ source: workspace, output, env: { VERCEL: '1', VERCEL_ENV: 'preview', VERCEL_PROJECT_PRODUCTION_URL: 'whats-ruddy.vercel.app' }, quiet: true });
+  const preview = await checkSite(output, { quiet: true });
+  assert.equal(preview.noindex, true);
+  assert.equal(preview.origin, 'https://whatsp.vercel.app');
   assert.doesNotMatch(await fs.readFile(path.join(output, 'sitemap.xml'), 'utf8'), /<loc>/);
   for (const page of pages) {
-    assert.match(await fs.readFile(path.join(output, page.file), 'utf8'), /name="robots" content="noindex, follow"/, `${page.file}: 预览禁止索引`);
+    const html = await fs.readFile(path.join(output, page.file), 'utf8');
+    assert.match(html, /name="robots" content="noindex, follow"/, `${page.file}: 预览禁止索引`);
+    assert.ok(html.includes(`<link rel="canonical" href="https://whatsp.vercel.app${page.route}">`), `${page.file}: 预览仍指向正式 canonical`);
   }
-  await buildSite({ source: workspace, output, env: { SITE_URL: 'https://custom-domain.example.com', GOOGLE_SITE_VERIFICATION: 'token"<>&$&' }, quiet: true });
+  await buildSite({ source: workspace, output, env: { VERCEL: '1', VERCEL_ENV: 'production', SITE_URL: 'https://custom-domain.example.com', VERCEL_PROJECT_PRODUCTION_URL: 'whats-ruddy.vercel.app', GOOGLE_SITE_VERIFICATION: 'token"<>&$&' }, quiet: true });
   assert.equal((await checkSite(output, { quiet: true })).origin, 'https://custom-domain.example.com');
   const customIndex = await fs.readFile(path.join(output, 'index.html'), 'utf8');
   assert.match(customIndex, /content="token&quot;&lt;&gt;&amp;\$&amp;"/);
-  assert.doesNotMatch(customIndex, /test-guide\.vercel\.app/);
+  for (const page of pages) {
+    const html = await fs.readFile(path.join(output, page.file), 'utf8');
+    assert.ok(html.includes(`<link rel="canonical" href="https://custom-domain.example.com${page.route}">`), `${page.file}: SITE_URL 覆盖正式域名`);
+    assert.doesNotMatch(html, /whatsp\.vercel\.app|whats-ruddy\.vercel\.app/, `${page.file}: 覆盖后不能残留原域名`);
+  }
   assert.match(await fs.readFile(path.join(output, 'sitemap.xml'), 'utf8'), /https:\/\/custom-domain\.example\.com\/guide/);
 });

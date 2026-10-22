@@ -31,10 +31,10 @@
 
 ## 部署时的注意点
 
-源码中的域名占位符由 Vercel 构建统一替换。暂未确定域名时使用 Vercel 的稳定正式域名；确定后配置 `SITE_URL` 并重新部署。
+正式域名已确定为 `https://whatsp.vercel.app`。Vercel 构建使用此默认地址，显式 `SITE_URL` 可覆盖；不会再从自动项目域名推导 canonical。既有 `SITE_URL` 若指向旧域名，需要改为当前域名或删除。
 
 当前 `dist/` 为本地预览构建，使用 localhost 和 noindex。请将交付源码导入 Vercel，采用 `npm run build` + `dist`，不要直接发布本地预览产物。
 
-真实 Vercel 线上响应头、域名解析、Google/Bing 站点验证与 Sitemap 提交尚未执行。网站已提供所需配置入口和部署步骤，详见根目录 README。
+域名修复回归：4 项集成测试与1484项静态检查通过；生产构建8页 canonical、7条Sitemap及robots均指向 `whatsp.vercel.app`，Preview仍为noindex，验证标签保留。线上首次检查发现所有SEO地址指旧域名，随后目标域名返回Vercel `DEPLOYMENT_NOT_FOUND`；代码通过不代表线上绑定完成。当前可访问的同名Vercel项目连接另一个仓库，未修改其绑定或部署。Google/Bing站长工具内重新验证和Sitemap提交未执行。
 
 截图保存在本地 `docs/qa/`，不作为网页运行资源，也不打入轻量源码部署包。

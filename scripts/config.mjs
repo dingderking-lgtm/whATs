@@ -2,6 +2,7 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
 export const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+export const productionSiteUrl = 'https://whatsp.vercel.app';
 export const pages = [
   { file: 'index.html', route: '/', indexable: true },
   { file: 'guide.html', route: '/guide', indexable: true },
@@ -18,12 +19,9 @@ export function resolveBuildOptions(env = process.env) {
   const onVercel = env.VERCEL === '1' || Boolean(target);
   const preview = onVercel && target !== 'production';
   const explicit = env.SITE_URL?.trim();
-  const productionDomain = env.VERCEL_PROJECT_PRODUCTION_URL?.trim();
-  if (!explicit && !productionDomain && onVercel) {
-    throw new Error('缺少正式域名：设置 SITE_URL=https://你的域名，或在 Vercel 开启 System Environment Variables，确保 VERCEL_PROJECT_PRODUCTION_URL 可用。');
-  }
-  const localFallback = !explicit && !productionDomain;
-  const value = explicit || (productionDomain ? `https://${productionDomain}` : 'http://localhost:4173');
+  // Pin the user-selected production host; Vercel's automatic host may be an old alias.
+  const localFallback = !explicit && !onVercel;
+  const value = explicit || (onVercel ? productionSiteUrl : 'http://localhost:4173');
   let url;
   try { url = new URL(value); } catch { throw new Error('SITE_URL 必须是完整网址，例如 https://example.com。'); }
   if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password || url.search || url.hash || url.pathname !== '/') {
