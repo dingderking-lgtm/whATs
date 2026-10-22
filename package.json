@@ -1,0 +1,15 @@
+{
+  "name": "whatsapp-web-chinese-guide",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "可部署到 Vercel 的中文 WhatsApp Web 独立使用指南",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "build": "node scripts/build.mjs && node scripts/check.mjs",
+    "check": "node scripts/check.mjs",
+    "preview": "node scripts/serve.mjs",
+    "dev": "npm run build && npm run preview",
+    "test": "node --test scripts/delivery.test.mjs"
+  }
+}
