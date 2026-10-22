@@ -61,27 +61,32 @@ test('真实 HTML 的生产与预览产物、验证标签、clean URL 及404行�
   await buildSite({ source: workspace, output, env: { VERCEL: '1', VERCEL_ENV: 'production', VERCEL_PROJECT_PRODUCTION_URL: 'test-guide.vercel.app', GOOGLE_SITE_VERIFICATION: 'google-token', BING_SITE_VERIFICATION: 'bing-token' }, quiet: true });
   const production = await checkSite(output, { quiet: true });
   assert.equal(production.noindex, false);
-  const index = await fs.readFile(path.join(output, 'index.html'), 'utf8');
-  assert.match(index, /name="google-site-verification" content="google-token"/);
-  assert.match(index, /name="msvalidate.01" content="bing-token"/);
+  for (const page of pages) {
+    const html = await fs.readFile(path.join(output, page.file), 'utf8');
+    assert.equal([...html.matchAll(/name="google-site-verification" content="google-token"/g)].length, 1, `${page.file}: Google 验证标签`);
+    assert.equal([...html.matchAll(/name="msvalidate.01" content="bing-token"/g)].length, 1, `${page.file}: Bing 验证标签`);
+  }
   assert.ok((await fs.readFile(path.join(workspace, 'index.html'), 'utf8')).includes('{{SITE_URL}}'), '构建不能改写 HTML 源码');
   const server = await createPreviewServer({ directory: output });
   await new Promise((resolve, reject) => { server.once('error', reject); server.listen(0, '127.0.0.1', resolve); });
   t.after(() => new Promise(resolve => { server.closeAllConnections(); server.close(resolve); }));
   const base = `http://127.0.0.1:${server.address().port}`;
-  for (const route of ['/', '/guide', '/about', '/privacy']) {
-    const response = await fetch(`${base}${route}`);
-    assert.equal(response.status, 200, route);
+  for (const page of pages.filter(page => page.indexable)) {
+    const response = await fetch(`${base}${page.route}`);
+    assert.equal(response.status, 200, page.route);
     assert.match(response.headers.get('content-type'), /text\/html/);
+    assert.equal(await response.text(), await fs.readFile(path.join(output, page.file), 'utf8'), `${page.route}: 应返回对应页面正文`);
+    if (page.route !== '/') {
+      const redirect = await fetch(`${base}/${page.file}?from=test`, { redirect: 'manual' });
+      assert.equal(redirect.status, 308, page.file);
+      assert.equal(redirect.headers.get('location'), `${page.route}?from=test`, page.file);
+    }
   }
   for (const route of ['/missing-page', '/assets/missing.svg', '/README.md']) {
     const response = await fetch(`${base}${route}`);
     assert.equal(response.status, 404, route);
     assert.match(await response.text(), /noindex/);
   }
-  const redirect = await fetch(`${base}/guide.html?from=test`, { redirect: 'manual' });
-  assert.equal(redirect.status, 308);
-  assert.equal(redirect.headers.get('location'), '/guide?from=test');
   const head = await fetch(`${base}/`, { method: 'HEAD' });
   assert.equal(head.status, 200);
   assert.equal(await head.text(), '');
@@ -89,7 +94,9 @@ test('真实 HTML 的生产与预览产物、验证标签、clean URL 及404行�
   await buildSite({ source: workspace, output, env: { VERCEL: '1', VERCEL_ENV: 'preview', VERCEL_PROJECT_PRODUCTION_URL: 'test-guide.vercel.app' }, quiet: true });
   assert.equal((await checkSite(output, { quiet: true })).noindex, true);
   assert.doesNotMatch(await fs.readFile(path.join(output, 'sitemap.xml'), 'utf8'), /<loc>/);
-  assert.match(await fs.readFile(path.join(output, 'index.html'), 'utf8'), /name="robots" content="noindex, follow"/);
+  for (const page of pages) {
+    assert.match(await fs.readFile(path.join(output, page.file), 'utf8'), /name="robots" content="noindex, follow"/, `${page.file}: 预览禁止索引`);
+  }
   await buildSite({ source: workspace, output, env: { SITE_URL: 'https://custom-domain.example.com', GOOGLE_SITE_VERIFICATION: 'token"<>&$&' }, quiet: true });
   assert.equal((await checkSite(output, { quiet: true })).origin, 'https://custom-domain.example.com');
   const customIndex = await fs.readFile(path.join(output, 'index.html'), 'utf8');

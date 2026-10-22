@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>WhatsApp 网页版登录教程｜iPhone、Android 扫码关联与退出方法</title>
-  <meta name="description" content="独立中文教程：了解 WhatsApp Web 在 iPhone、Android 上的设备关联步骤，掌握电脑退出登录、二维码问题排查与设备安全方法。">
+  <meta name="description" content="WhatsApp 网页版独立中文指南：详解 iPhone、Android 首次关联、登录成功检查、多设备会话、电脑退出与手机远程移除设备，以及共享电脑的安全细节。">
   <meta name="robots" content="{{ROBOTS}}">
   <meta name="theme-color" content="#fcfaf6">
 {{SITE_VERIFICATION}}
@@ -15,7 +15,7 @@
   <meta property="og:locale" content="zh_CN">
   <meta property="og:site_name" content="WhatsApp 网页版中文指南">
   <meta property="og:title" content="WhatsApp 网页版登录教程｜iPhone、Android 扫码关联与退出方法">
-  <meta property="og:description" content="独立中文教程：了解 WhatsApp Web 在 iPhone、Android 上的设备关联步骤，掌握电脑退出登录、二维码问题排查与设备安全方法。">
+  <meta property="og:description" content="WhatsApp 网页版独立中文指南：详解 iPhone、Android 首次关联、登录成功检查、多设备会话、电脑退出与手机远程移除设备，以及共享电脑的安全细节。">
   <meta property="og:url" content="{{SITE_URL}}/guide">
   <meta property="og:image" content="{{SITE_URL}}/assets/og-cover.png">
   <meta property="og:image:width" content="1200">
@@ -23,9 +23,9 @@
   <meta property="og:image:alt" content="WhatsApp 网页版中文指南：让对话在电脑上继续">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="WhatsApp 网页版登录教程｜iPhone、Android 扫码关联与退出方法">
-  <meta name="twitter:description" content="独立中文教程：了解 WhatsApp Web 在 iPhone、Android 上的设备关联步骤，掌握电脑退出登录、二维码问题排查与设备安全方法。">
+  <meta name="twitter:description" content="WhatsApp 网页版独立中文指南：详解 iPhone、Android 首次关联、登录成功检查、多设备会话、电脑退出与手机远程移除设备，以及共享电脑的安全细节。">
   <meta name="twitter:image" content="{{SITE_URL}}/assets/og-cover.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"{{SITE_URL}}/guide#webpage","url":"{{SITE_URL}}/guide","name":"WhatsApp 网页版登录教程｜iPhone、Android 扫码关联与退出方法","headline":"WhatsApp 网页版登录教程｜iPhone、Android 扫码关联与退出方法","description":"独立中文教程：了解 WhatsApp Web 在 iPhone、Android 上的设备关联步骤，掌握电脑退出登录、二维码问题排查与设备安全方法。","inLanguage":"zh-CN","dateModified":"2026-10-23","isPartOf":{"@id":"{{SITE_URL}}/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"{{SITE_URL}}/"},{"@type":"ListItem","position":2,"name":"使用教程","item":"{{SITE_URL}}/guide"}]}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"{{SITE_URL}}/guide#webpage","url":"{{SITE_URL}}/guide","name":"WhatsApp 网页版登录教程｜iPhone、Android 扫码关联与退出方法","headline":"WhatsApp 网页版登录教程｜iPhone、Android 扫码关联与退出方法","description":"WhatsApp 网页版独立中文指南：详解 iPhone、Android 首次关联、登录成功检查、多设备会话、电脑退出与手机远程移除设备，以及共享电脑的安全细节。","inLanguage":"zh-CN","dateModified":"2026-10-23","isPartOf":{"@id":"{{SITE_URL}}/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"{{SITE_URL}}/"},{"@type":"ListItem","position":2,"name":"登录与设备关联","item":"{{SITE_URL}}/guide"}]}]}</script>
   <script src="/assets/app.js" defer></script>
 </head>
 <body>
@@ -34,42 +34,52 @@
     <div class="container header-inner">
       <a class="brand" href="/" aria-label="WhatsApp 网页版中文指南首页"><img src="/assets/whatsapp-icon.svg" width="38" height="38" alt="WhatsApp"><span class="brand-name">WhatsApp<span aria-hidden="true"> Web</span><small>网页版 · 独立中文指南</small></span></a>
       <button class="menu-toggle" type="button" aria-label="展开导航菜单" aria-expanded="false" aria-controls="primary-nav"><span></span><span></span></button>
-      <nav class="nav" id="primary-nav" aria-label="主导航"><a href="/#features">功能亮点</a><a href="/#guide">使用指南</a><a href="/#faq">常见问题</a><a class="button button-small" href="https://web.whatsapp.com/" target="_blank" rel="noopener noreferrer">打开网页版<svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#external"></use></svg></a></nav>
+      <nav class="nav" id="primary-nav" aria-label="主导航"><a href="/#features">功能亮点</a><a href="/#guides">使用指南</a><a href="/#faq">常见问题</a><a class="button button-small" href="https://web.whatsapp.com/" target="_blank" rel="noopener noreferrer">打开网页版<svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#external"></use></svg></a></nav>
     </div>
   </header>
   <main id="main" class="container article-container">
-    <nav class="breadcrumbs" aria-label="面包屑导航"><a href="/">首页</a><span aria-hidden="true">/</span><span aria-current="page">使用教程</span></nav>
+    <nav class="breadcrumbs" aria-label="面包屑导航"><a href="/">首页</a><span aria-hidden="true">/</span><span aria-current="page">登录与设备关联</span></nav>
     <article>
-      <header class="article-header"><p class="section-kicker">YOUR FIRST CHAT ON A BIGGER SCREEN</p><h1><span class="title-chunk">WhatsApp 网页版</span><span class="title-chunk">登录教程</span></h1><p class="article-lead">从手机关联到电脑聊天，跟着下面的步骤完成首次使用，也了解如何退出登录和处理常见问题。</p><p class="article-meta">独立中文使用指南 · 最后核实：2026 年 10 月 23 日</p></header>
+      <header class="article-header"><p class="section-kicker">START WITH YOUR PHONE</p><h1><span class="title-chunk">WhatsApp 网页版</span><span class="title-chunk">登录与设备关联指南</span></h1><p class="article-lead">准备手机、完成关联、确认消息可用，再学会管理电脑上的会话。本页按首次使用的顺序说明操作，并告诉你每一步应当看到什么。</p><p class="article-meta">独立中文使用指南 · 最后核实：2026 年 10 月 23 日</p></header>
       <div class="prose">
-        <nav class="toc" aria-label="本页目录"><strong>快速找到需要的步骤</strong><ul><li><a href="#prepare">使用前的准备</a></li><li><a href="#iphone">iPhone 关联方法</a></li><li><a href="#android">Android 关联方法</a></li><li><a href="#logout">退出与移除设备</a></li><li><a href="#troubleshooting">登录问题排查</a></li><li><a href="#security">设备安全提醒</a></li></ul></nav>
-        <h2 id="prepare">先准备手机，再打开电脑浏览器</h2>
-        <p>准备一部已安装并登录 WhatsApp 的手机，以及可联网的电脑。网页版无需安装电脑客户端；请使用受支持的新版浏览器，打开 <a href="https://web.whatsapp.com/" target="_blank" rel="noopener noreferrer">web.whatsapp.com 官方入口</a>，等待设备关联页面加载。</p>
-        <p>核对地址栏中的域名为 <strong>web.whatsapp.com</strong>。首次关联需要主要手机确认；本站只提供操作说明，不生成登录二维码，也不接收手机号或验证码。</p>
-        <h2 id="iphone">在 iPhone 上关联网页版</h2>
-        <ol><li>打开手机上的 WhatsApp，进入「设置」。部分版本的入口可能以个人头像显示。</li><li>轻点「已关联的设备」，然后选择「关联设备」。</li><li>按照手机提示完成面容 ID、触控 ID 或锁屏验证，使用 WhatsApp 内的扫描界面对准电脑官方页面上的二维码。</li><li>等待设备完成关联并加载聊天。首次加载可能需要一点时间，请保持网络稳定。</li></ol>
-        <h2 id="android">在 Android 手机上关联网页版</h2>
-        <ol><li>打开手机 WhatsApp，轻点右上角「⋮」更多选项。</li><li>进入「已关联的设备」，选择「关联设备」。</li><li>按照提示解锁手机或完成身份确认，再扫描电脑官方页面上的二维码。</li><li>待电脑显示聊天界面后，即可选择联系人或群组继续对话。不同版本的菜单名称可能略有差异。</li></ol>
-        <div class="article-callout"><p>请使用 WhatsApp 中的「关联设备」扫描功能。二维码应来自你正在操作的官方网页；如果官方页面提供其他关联方式，请直接按官方界面指引完成。</p></div>
-        <h2 id="logout">用完后，退出并检查设备列表</h2>
-        <p>在网页版菜单中选择「退出登录」。如果电脑已经不在身边，可以在手机 WhatsApp 的「已关联的设备」列表中选择对应电脑，再选择退出。完成后检查该设备是否已移除。</p>
-        <p>关闭浏览器标签页不等于退出登录。共享电脑使用结束后，应主动退出；换电脑、出售设备或发现陌生关联记录时，也应检查列表并移除不再信任的设备。</p>
-        <h2 id="troubleshooting">二维码不显示、扫码无反应，怎么排查？</h2>
-        <h3>二维码未加载或已经失效</h3>
-        <p>先确认电脑能正常访问官方站点，再刷新页面获取新二维码。保持页面显示完整，避免二维码被浏览器缩放、窗口遮挡或屏幕反光影响。</p>
-        <h3>手机无法识别二维码</h3>
-        <p>确认从「已关联的设备」进入扫码界面，并允许 WhatsApp 使用相机。擦净镜头、调整扫描距离，再更新手机应用和浏览器后重试。</p>
-        <h3>已经关联，但聊天加载缓慢</h3>
-        <p>检查电脑网络，等待首次同步完成。若仍停留在加载界面，可重新打开官方页面；确有需要时，再从手机移除该设备并重新关联。不要为了排查而轻易删除手机应用或聊天记录。</p>
-        <p>如果问题持续，请查看 <a href="https://faq.whatsapp.com/" target="_blank" rel="noopener noreferrer">WhatsApp 官方帮助中心</a>，并以实际报错提示为准。若选择清理浏览器站点数据，请先确认影响：这通常会清除登录状态，需要重新关联。</p>
-        <h2 id="security">让设备关联更安心</h2>
-        <p>WhatsApp 官方说明可关联最多四台设备；成功关联后，电脑不要求手机一直在线，但注册及关联新设备仍需主要手机。个人消息与通话采用端到端加密，设备本身的安全仍需要你维护。</p>
-        <ul><li>为电脑设置锁屏，离开座位时锁定屏幕。</li><li>定期查看手机上的关联设备，移除陌生或不再使用的设备。</li><li>不向他人提供验证码，不代扫来历不明的设备关联二维码。</li><li>如需独立电脑应用，前往 <a href="https://www.whatsapp.com/download" target="_blank" rel="noopener noreferrer">WhatsApp 官方下载页</a>选择版本。</li></ul>
-        <a class="button" href="https://web.whatsapp.com/" target="_blank" rel="noopener noreferrer">准备好了，打开官方网页版<svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#external"></use></svg></a>
-        <aside class="source-list" aria-label="官方参考资料"><p><strong>参考资料与更新说明</strong></p><ul><li><a href="https://faq.whatsapp.com/1317564962315842/" target="_blank" rel="noopener noreferrer">WhatsApp 帮助中心：如何关联设备</a></li><li><a href="https://www.youtube.com/watch?v=2PzIAa3M8rM" target="_blank" rel="noopener noreferrer">WhatsApp 官方频道：在更多设备上使用 WhatsApp</a></li><li><a href="https://www.whatsapp.com/calling" target="_blank" rel="noopener noreferrer">WhatsApp 官方通话与关联设备说明</a></li></ul><p>本页于 2026 年 10 月 23 日根据官方资料整理。产品功能和菜单可能调整，实际操作请以官方最新界面为准。</p></aside>
+        <nav class="toc" aria-label="本页目录"><strong>按你的进度继续</strong><ul><li><a href="#prepare">登录前准备与官方入口</a></li><li><a href="#iphone">iPhone 关联步骤</a></li><li><a href="#android">Android 关联步骤</a></li><li><a href="#check">怎么确认已经关联成功</a></li><li><a href="#sessions">再次打开与多设备使用</a></li><li><a href="#logout">电脑退出与手机远程移除</a></li><li><a href="#troubleshooting">遇到问题先查哪一步</a></li><li><a href="#security">共享电脑与账号安全</a></li></ul></nav>
+        <h2 id="prepare">登录前，先准备这三样</h2>
+        <p>WhatsApp 网页版是在电脑浏览器中使用 WhatsApp 的方式。首次关联需要一部已经登录 WhatsApp 的主要手机、一台可联网的电脑，以及可正常使用的浏览器。它不是在本站注册的新账号：关联完成后，电脑成为原有 WhatsApp 账号的关联设备。</p>
+        <ol><li><strong>确认手机可用。</strong>先在手机打开 WhatsApp，确认登录的是你希望在电脑使用的账号；如果手机仍处于注册或账号验证流程，先按照手机应用的提示完成。</li><li><strong>准备电脑环境。</strong>更新到浏览器支持的当前版本，保持网络稳定。首次关联时把手机放在电脑旁边，便于扫码和确认；在共享电脑上先考虑是否适合处理私人聊天。</li><li><strong>核对官方地址。</strong>手动输入或通过下方按钮打开 <a href="https://web.whatsapp.com/" target="_blank" rel="noopener noreferrer">web.whatsapp.com</a>。确认地址栏域名后，再继续设备关联。</li></ol>
+        <div class="article-callout"><p><strong>本站只提供教程。</strong>二维码、账号确认与聊天都在 WhatsApp 官方页面或应用内完成。不要在第三方教程网页填写手机号、短信验证码或两步验证 PIN，也不要扫描别人发来的“帮忙登录”二维码。</p></div>
+        <p>如果官方页面已直接显示聊天列表，说明当前浏览器可能已有会话。先核对账号是否属于自己；不要直接在他人的聊天界面发送消息。需要更换账号时，先退出原会话，再关联自己的设备。</p>
+        <h2 id="iphone">iPhone：从 WhatsApp 设置进入关联设备</h2>
+        <ol><li>在电脑打开官方网页版，保持设备关联页面可见。二维码要完整显示，避免被其他窗口遮住。</li><li>在 iPhone 打开 WhatsApp，进入「设置」，找到「已关联的设备」。入口名称或位置可能随版本调整，以手机实际界面为准。</li><li>选择「关联设备」，根据提示使用面容 ID、触控 ID 或设备锁屏方式确认身份；需要扫码时，允许 WhatsApp 使用手机相机。</li><li>用 WhatsApp 应用内的扫描界面对准电脑上的官方二维码。保持镜头清晰、屏幕不过暗，并适当调整距离，让整个图案进入扫描区域。</li><li>等待电脑加载聊天列表，同时查看手机的关联设备记录。出现设备记录后，再按下方的检查步骤确认可以正常使用。</li></ol>
+        <p><strong>这一阶段的完成标志：</strong>电脑从关联页面进入聊天界面，手机能够看到对应的新设备。扫码画面消失本身还不能证明聊天已加载完成。</p>
+        <h2 id="android">Android：从更多选项进入关联设备</h2>
+        <ol><li>先在电脑打开 <a href="https://web.whatsapp.com/" target="_blank" rel="noopener noreferrer">WhatsApp Web 官方页面</a>，等待关联界面加载。</li><li>打开 Android 手机上的 WhatsApp，在主界面点击「⋮」更多选项，进入「已关联的设备」。</li><li>点击「关联设备」，按照提示解锁手机或完成身份确认，然后使用 WhatsApp 中出现的扫描界面。</li><li>对准电脑官方页面的二维码，等待手机确认。二维码失效时，先在电脑获取新的二维码，再重新扫描。</li><li>电脑显示聊天列表后，检查账号和设备记录，再开始发送消息。菜单翻译略有差异时，寻找含义相同的设备关联入口。</li></ol>
+        <p>请使用 WhatsApp 内的关联设备功能，而不是手机相机或其他扫一扫工具。如果官方网页提供其他关联方式，可直接遵循该页面与手机应用的配套指引；不要把关联过程中的代码交给他人代操作。</p>
+        <h2 id="check">关联后，做一次简单的可用性检查</h2>
+        <p>第一次显示聊天界面时，内容可能还在加载。先查看页面是否仍提示连接或同步，再按下面顺序确认。这里检查的是当前会话是否可用，不把网页版当作聊天记录备份。</p>
+        <ul><li><strong>核对账号。</strong>查看个人资料与熟悉的聊天，确认关联的是预期账号；多账号用户尤其要先检查。</li><li><strong>打开一段最近的对话。</strong>观察是否能进入聊天、读取已加载内容。某段旧记录暂时不可见，不应直接推断手机记录已被删除。</li><li><strong>试发一条合适的消息。</strong>在已有且适合测试的对话中发送普通文本，观察发送状态。不要为了测试而重复发送重要通知或付款指令。</li><li><strong>检查设备列表。</strong>在手机「已关联的设备」中核对新设备。发现不认识的记录时，先移除并检查账号安全。</li></ul>
+        <p>随后可以按需设置通知、尝试传文件或查找消息，具体步骤见 <a href="/messages-files">消息、文件与通知使用指南</a>。若一直停在加载状态，转到 <a href="/troubleshooting#sync">聊天同步与连接排查</a>。</p>
+        <h2 id="sessions">下次再用，是否还需要手机扫码？</h2>
+        <p>这取决于当前浏览器是否保留有效会话。再次打开官方页面时，如果直接进入自己的聊天界面，就可以继续；如果回到关联页面，则需要重新关联。无痕窗口、站点数据清理、主动退出或浏览器设置变化都可能影响会话保留，不必把每次重新扫码都视为账号故障。</p>
+        <p>WhatsApp 官方说明可以关联最多四台设备，注册账号和关联新设备仍需主要手机；成功关联后的电脑不要求手机始终在线。电脑本身仍需要能连接到 WhatsApp。遇到手机暂时没电与电脑断网这两种情况，应分别判断，不要混为同一个问题。</p>
+        <p>不同浏览器或浏览器个人资料有各自的站点数据。你在一个窗口中成功关联，并不能据此认定其他浏览器已登录。建议固定使用自己的浏览器个人资料，并定期查看手机设备列表；需要长期在电脑工作时，可以比较 <a href="/web-vs-desktop">网页版与桌面应用的使用方式</a>。</p>
+        <h2 id="logout">退出登录：区分关闭页面、退出会话和移除设备</h2>
+        <section class="table-scroll" tabindex="0" aria-label="退出与移除设备操作对照表"><table class="guide-table"><caption>离开电脑时，选择适合的操作</caption><thead><tr><th scope="col">操作</th><th scope="col">如何判断结果</th></tr></thead><tbody><tr><th scope="row">关闭标签页或浏览器</th><td>只是离开当前窗口，不应作为已退出的证明；会话是否保留取决于登录选项和浏览器状态。</td></tr><tr><th scope="row">在网页版选择退出登录</th><td>等待页面回到关联界面，并在手机检查对应设备状态。</td></tr><tr><th scope="row">在手机移除关联设备</th><td>选择正确设备并退出，确认该记录从关联列表移除，适合电脑不在身边时处理。</td></tr></tbody></table></section>
+        <h3>电脑还在身边</h3>
+        <p>在 WhatsApp 网页版的菜单或设置中找到「退出登录」，完成确认并等待页面返回关联界面。不要只点击浏览器右上角关闭按钮就离开。若使用的是共享电脑，还应检查自己下载的附件是否留在下载文件夹；退出账号不会替你处理已经保存到电脑中的文件。</p>
+        <h3>已经离开电脑</h3>
+        <p>打开手机 WhatsApp 的「已关联的设备」，根据设备类型及界面显示的信息，选择需要移除的设备并退出。完成后重新查看列表，确认相应记录已移除。发现无法辨认的会话时，应先移除不信任的设备，再核查账号安全设置。</p>
+        <h2 id="troubleshooting">遇到问题，先判断卡在哪个环节</h2>
+        <ul><li><strong>电脑打不开或二维码不显示：</strong>查看 <a href="/troubleshooting#loading">网页与二维码加载排查</a>，先确认地址和连接，再处理浏览器。</li><li><strong>手机无法扫到二维码：</strong>查看 <a href="/troubleshooting#scan">扫描与关联失败排查</a>，检查入口、相机权限和二维码状态。</li><li><strong>已登录但消息一直加载：</strong>查看 <a href="/troubleshooting#sync">同步与发送状态排查</a>，区分初次加载、网络问题与历史记录问题。</li><li><strong>每次都需要重新关联：</strong>查看 <a href="/troubleshooting#session">会话保留排查</a>，检查浏览模式和站点数据设置。</li></ul>
+        <p>排查时先保存正在编辑但未发送的内容。清理站点数据可能移除本地会话和偏好，需要重新关联；不要把清空整个浏览器、删除手机应用或删除聊天记录当作第一步。</p>
+        <h2 id="security">共享电脑上，哪些细节最容易遗漏？</h2>
+        <p>个人消息和通话的端到端加密，并不等于任何人都无法查看已经解锁的电脑屏幕。离开座位前锁屏，在不再信任的电脑上退出，会比只依赖网络加密更直接地减少他人查看聊天的机会。</p>
+        <ul><li>不向他人提供注册验证码、两步验证 PIN 或关联代码，不代扫来源不明的二维码。</li><li>在共享空间按需关闭消息预览，避免通知在屏幕上展示私人内容；浏览器与系统通知应分别检查。</li><li>定期查看关联设备，移除旧电脑、临时使用过的设备和陌生记录。</li><li>从 WhatsApp 官方下载渠道获取应用，不安装声称可“免手机登录”或“恢复任何聊天”的未知扩展。</li><li>使用结束后退出会话，并妥善处理下载的图片和文件；退出设备与删除已下载附件是两件事。</li></ul>
+        <a class="button" href="https://web.whatsapp.com/" target="_blank" rel="noopener noreferrer">打开官方网页版，开始关联<svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#external"></use></svg></a>
+        <nav class="related-guides" aria-label="继续阅读"><h2>接下来可以看</h2><ul><li><a href="/messages-files">消息、文件与通知：关联成功后的日常操作</a></li><li><a href="/troubleshooting">故障排查：按实际症状找到下一步</a></li><li><a href="/web-vs-desktop">网页版与桌面版：选择适合自己的入口</a></li></ul></nav>
+        <aside class="source-list" aria-label="官方参考资料"><p><strong>参考资料与更新说明</strong></p><ul><li><a href="https://faq.whatsapp.com/1317564962315842/" target="_blank" rel="noopener noreferrer">WhatsApp 帮助中心：如何关联设备</a></li><li><a href="https://www.youtube.com/watch?v=2PzIAa3M8rM" target="_blank" rel="noopener noreferrer">WhatsApp 官方频道：在更多设备上使用 WhatsApp</a></li><li><a href="https://faq.whatsapp.com/1428782138011916/?cms_platform=web" target="_blank" rel="noopener noreferrer">WhatsApp 帮助中心：检查与移除不认识的关联设备</a></li><li><a href="https://www.whatsapp.com/calling" target="_blank" rel="noopener noreferrer">WhatsApp 官方通话与关联设备说明</a></li><li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener noreferrer">Google Chrome 帮助：管理 Cookie 与站点数据</a></li></ul><p>本页于 2026 年 10 月 23 日根据官方资料整理，检查清单为本站归纳。菜单、登录选项与功能会随版本调整，请以官方页面和应用内的实际提示为准。</p></aside>
       </div>
     </article>
   </main>
-  <footer class="site-footer"><div class="container"><div class="footer-top"><div><a class="brand" href="/"><img src="/assets/whatsapp-icon.svg" width="31" height="31" alt="WhatsApp"><span class="brand-name">WhatsApp Web<small>网页版 · 独立中文指南</small></span></a><p class="footer-description">本网站为独立中文使用指南，与 WhatsApp 或 Meta 无隶属、授权或赞助关系。WhatsApp 名称及标志归其权利人所有。本站不提供账号登录或消息服务。</p></div><nav class="footer-links" aria-label="页脚导航"><a href="/guide">使用教程</a><a href="/about">关于本站</a><a href="/privacy">隐私说明</a></nav></div><div class="footer-bottom"><span>© 2026 WhatsApp 网页版中文指南 · 内容核对于 2026 年 10 月 23 日</span><span>资料来源：<a href="https://www.whatsapp.com/" target="_blank" rel="noopener noreferrer">WhatsApp 官网</a> · <a href="https://faq.whatsapp.com/" target="_blank" rel="noopener noreferrer">官方帮助中心</a></span></div></div></footer>
+  <footer class="site-footer"><div class="container"><div class="footer-top"><div><a class="brand" href="/"><img src="/assets/whatsapp-icon.svg" width="31" height="31" alt="WhatsApp"><span class="brand-name">WhatsApp Web<small>网页版 · 独立中文指南</small></span></a><p class="footer-description">本网站为独立中文使用指南，与 WhatsApp 或 Meta 无隶属、授权或赞助关系。WhatsApp 名称及标志归其权利人所有。本站不提供账号登录或消息服务。</p></div><nav class="footer-links" aria-label="页脚导航"><a href="/#guides">指南目录</a><a href="/guide">使用教程</a><a href="/about">关于本站</a><a href="/privacy">隐私说明</a></nav></div><div class="footer-bottom"><span>© 2026 WhatsApp 网页版中文指南 · 内容核对于 2026 年 10 月 23 日</span><span>资料来源：<a href="https://www.whatsapp.com/" target="_blank" rel="noopener noreferrer">WhatsApp 官网</a> · <a href="https://faq.whatsapp.com/" target="_blank" rel="noopener noreferrer">官方帮助中心</a></span></div></div></footer>
 </body>
 </html>

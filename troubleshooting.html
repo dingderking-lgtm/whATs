@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WhatsApp 网页版故障排查｜二维码、同步、掉线与通知问题</title>
+  <meta name="description" content="按症状排查 WhatsApp 网页版打不开、二维码扫不出、聊天不同步、反复掉线和通知缺失，了解安全的检查顺序、站点数据清理影响与官方求助方式。">
+  <meta name="robots" content="{{ROBOTS}}">
+  <meta name="theme-color" content="#fcfaf6">
+{{SITE_VERIFICATION}}
+  <link rel="canonical" href="{{SITE_URL}}/troubleshooting">
+  <link rel="icon" type="image/svg+xml" href="/assets/whatsapp-icon.svg">
+  <link rel="stylesheet" href="/assets/styles.css">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:site_name" content="WhatsApp 网页版中文指南">
+  <meta property="og:title" content="WhatsApp 网页版故障排查｜二维码、同步、掉线与通知问题">
+  <meta property="og:description" content="按症状排查 WhatsApp 网页版打不开、二维码扫不出、聊天不同步、反复掉线和通知缺失，了解安全的检查顺序、站点数据清理影响与官方求助方式。">
+  <meta property="og:url" content="{{SITE_URL}}/troubleshooting">
+  <meta property="og:image" content="{{SITE_URL}}/assets/og-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="WhatsApp 网页版中文指南：让对话在电脑上继续">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WhatsApp 网页版故障排查｜二维码、同步、掉线与通知问题">
+  <meta name="twitter:description" content="按症状排查 WhatsApp 网页版打不开、二维码扫不出、聊天不同步、反复掉线和通知缺失，了解安全的检查顺序、站点数据清理影响与官方求助方式。">
+  <meta name="twitter:image" content="{{SITE_URL}}/assets/og-cover.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"{{SITE_URL}}/troubleshooting#webpage","url":"{{SITE_URL}}/troubleshooting","name":"WhatsApp 网页版故障排查｜二维码、同步、掉线与通知问题","headline":"WhatsApp 网页版故障排查｜二维码、同步、掉线与通知问题","description":"按症状排查 WhatsApp 网页版打不开、二维码扫不出、聊天不同步、反复掉线和通知缺失，了解安全的检查顺序、站点数据清理影响与官方求助方式。","inLanguage":"zh-CN","dateModified":"2026-10-23","isPartOf":{"@id":"{{SITE_URL}}/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"{{SITE_URL}}/"},{"@type":"ListItem","position":2,"name":"使用指南","item":"{{SITE_URL}}/guide"},{"@type":"ListItem","position":3,"name":"故障排查","item":"{{SITE_URL}}/troubleshooting"}]}]}</script>
+  <script src="/assets/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳转到主要内容</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label="WhatsApp 网页版中文指南首页"><img src="/assets/whatsapp-icon.svg" width="38" height="38" alt="WhatsApp"><span class="brand-name">WhatsApp<span aria-hidden="true"> Web</span><small>网页版 · 独立中文指南</small></span></a>
+      <button class="menu-toggle" type="button" aria-label="展开导航菜单" aria-expanded="false" aria-controls="primary-nav"><span></span><span></span></button>
+      <nav class="nav" id="primary-nav" aria-label="主导航"><a href="/#features">功能亮点</a><a href="/#guides">使用指南</a><a href="/#faq">常见问题</a><a class="button button-small" href="https://web.whatsapp.com/" target="_blank" rel="noopener noreferrer">打开网页版<svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#external"></use></svg></a></nav>
+    </div>
+  </header>
+  <main id="main" class="container article-container">
+    <nav class="breadcrumbs" aria-label="面包屑导航"><a href="/">首页</a><span aria-hidden="true">/</span><a href="/guide">使用指南</a><span aria-hidden="true">/</span><span aria-current="page">故障排查</span></nav>
+    <article>
+      <header class="article-header"><p class="section-kicker">FIND THE SYMPTOM, CHECK THE CAUSE</p><h1><span class="title-chunk">WhatsApp 网页版</span><span class="title-chunk">常见问题排查</span></h1><p class="article-lead">从页面打不开、二维码扫不出，到消息卡住、通知不响，按实际症状逐项检查。每次只改变一个条件，更容易判断问题出在哪里。</p><p class="article-meta">独立中文使用指南 · 最后核实：2026 年 10 月 23 日</p></header>
+      <div class="prose">
+        <nav class="toc" aria-label="本页目录"><strong>选择与你看到的情况最接近的一项</strong><ul><li><a href="#before">开始前：记录现象，保护现有内容</a></li><li><a href="#loading">网页打不开或二维码不显示</a></li><li><a href="#scan">二维码扫不出或关联不成功</a></li><li><a href="#sync">聊天不同步、消息卡住</a></li><li><a href="#session">反复掉线或每次需要扫码</a></li><li><a href="#notifications">能收到消息，却没有通知</a></li><li><a href="#files">文件无法上传或下载</a></li><li><a href="#site-data">什么时候才清理站点数据</a></li><li><a href="#support">仍未解决：整理信息向官方求助</a></li></ul></nav>
+        <h2 id="before">先分清“连接问题”与“账号问题”</h2>
+        <p>打不开页面、无法扫码、消息发送中和账号限制提示，不是同一种故障。先记下发生时间、浏览器名称、页面原文提示，以及问题是只出现在电脑还是手机也存在。如果页面明确显示账号限制或验证要求，应按 WhatsApp 应用内说明处理，反复清缓存通常不能解决这类账号状态问题。</p>
+        <div class="article-callout"><p><strong>开始前先保留未发送的文字。</strong>下面从刷新、网络和权限检查开始，重新关联与清理数据放在后面。不要先卸载手机 WhatsApp、删除聊天记录或清空整个浏览器；这些操作会扩大影响，却不一定对应当前故障。</p></div>
+        <section class="table-scroll" tabindex="0" aria-label="故障症状与首次检查对照表"><table class="guide-table"><caption>用当前现象决定第一步</caption><thead><tr><th scope="col">你看到的现象</th><th scope="col">优先检查</th><th scope="col">下一步</th></tr></thead><tbody><tr><th scope="row">整个页面打不开</th><td>域名、电脑网络、浏览器错误提示</td><td><a href="#loading">加载排查</a></td></tr><tr><th scope="row">二维码可见，但扫不出</th><td>手机扫码入口、相机权限、图案完整度</td><td><a href="#scan">关联排查</a></td></tr><tr><th scope="row">聊天界面可见，消息不更新</th><td>连接提示、当前会话、电脑网络</td><td><a href="#sync">同步排查</a></td></tr><tr><th scope="row">消息正常，但不弹提醒</th><td>聊天静音、网站权限、系统通知</td><td><a href="#notifications">通知排查</a></td></tr></tbody></table></section>
+        <h2 id="loading">网页打不开，或一直不出现二维码</h2>
+        <ol><li><strong>从准确入口重试。</strong>在地址栏输入 <a href="https://web.whatsapp.com/" target="_blank" rel="noopener noreferrer">https://web.whatsapp.com/</a>，确认不是拼写相近的地址或第三方中转页。遇到证书、安全警告时，先核对地址和系统时间，不要直接忽略警告继续登录。</li><li><strong>区分电脑断网与特定站点问题。</strong>检查电脑能否打开其他常用可信网站。如果多个网站都失败，先处理网络连接；其他网页能打开，只能说明并非完全断网，不能据此证明 WhatsApp 的连接正常。</li><li><strong>刷新一次并观察变化。</strong>查看错误提示是否改变、页面是否开始加载。在公司或学校网络中，如果提示受管理或被限制，向网络管理员确认；不要为访问聊天服务而擅自关闭安全防护。</li><li><strong>检查浏览器环境。</strong>更新浏览器。若装有修改网页或拦截脚本的扩展，可在确认来源与作用后仅对该站点临时停用可疑扩展，再恢复并比较结果；也可用自己电脑上另一个受支持的浏览器检查页面能否加载。</li></ol>
+        <p><strong>成功标志：</strong>官方页面能完整显示关联入口或自己的聊天列表。另一个浏览器能打开而原浏览器不能，提示应继续检查原浏览器设置，但仍不足以断定是某个扩展造成。</p>
+        <h2 id="scan">二维码扫不出，或扫描后关联没有完成</h2>
+        <ol><li><strong>确认扫描入口正确。</strong>从手机 WhatsApp 的「已关联的设备 → 关联设备」进入。iPhone 与 Android 的完整入口见 <a href="/guide#iphone">iPhone 步骤</a>和 <a href="/guide#android">Android 步骤</a>。</li><li><strong>确认手机相机可用。</strong>如画面全黑或提示未授权，在手机系统中检查 WhatsApp 的相机权限，再返回应用重试。不要为了扫码给不相关的第三方应用授权。</li><li><strong>改善识别条件。</strong>擦净手机镜头，确保电脑二维码完整、不被遮挡；调整屏幕亮度、手机距离和角度，避免反光。需要时恢复浏览器的正常缩放。</li><li><strong>换用当前有效的二维码。</strong>如果电脑提示二维码过期，按页面提示刷新。不要继续扫描截图中或别人转发的旧二维码。</li><li><strong>扫描后观察两端。</strong>查看手机是否提示关联失败，以及电脑是否还在加载。若提示设备数量等限制，先去手机设备列表核对并移除不再使用的设备，再按官方界面重试。</li></ol>
+        <p><strong>成功标志：</strong>电脑进入聊天界面，手机出现对应关联设备。若仍失败，保留具体报错并跳到 <a href="#support">官方求助清单</a>，不要把验证码或二维码发给陌生人代办。</p>
+        <h2 id="sync">已进入聊天，但消息不更新或一直发送中</h2>
+        <p>先看问题范围：是所有聊天都停滞，还是只有一条消息、一个文件或某段旧记录。单条消息没有后续状态，并不能仅凭网页判断对方的在线情况，也不能据此断言账号被限制。</p>
+        <ol><li><strong>查看页面连接提示。</strong>首次关联后给页面时间加载，并保持电脑联网。暂时缺少旧记录时，先在手机核对原内容，不要通过删除聊天来“重新同步”。</li><li><strong>比较新消息与历史记录。</strong>如果新的普通文本能正常收发，而旧记录未显示，说明症状与整个会话断连不同。记录缺失范围与页面提示，按官方帮助核查相应内容。</li><li><strong>保存草稿后重新打开页面。</strong>观察是否恢复，避免连续点击发送导致同一条信息重复提交。文件尚在上传时，不要急于关闭标签页。</li><li><strong>仍然卡住再考虑重新关联。</strong>先确认手机和账号可用，从手机移除这台电脑，然后按 <a href="/guide">登录与设备关联指南</a>重连。重新关联不能保证恢复任何缺失的历史内容。</li></ol>
+        <p><strong>成功标志：</strong>连接提示恢复正常，并能在合适的已有对话中完成一次普通文本收发。若只有附件失败，继续查看 <a href="#files">文件问题</a>，无需先重建整个会话。</p>
+        <h2 id="session">每次打开都要扫码，或使用中反复退出</h2>
+        <p>先确认你是否始终使用同一个浏览器、同一个浏览器个人资料，以及普通窗口。另一个浏览器或资料目录不一定保留原有会话。无痕窗口、退出时清理数据的设置、清理工具或主动退出，都可能影响站点数据保留。</p>
+        <ul><li>在自己的可信电脑上，检查浏览器是否设置了关闭时删除站点数据；按个人隐私需要决定是否保留，不必为了便利关闭所有保护。</li><li>查看 WhatsApp 页面实际提供的登录选项。不要仅靠“我没有点退出”判断会话一定应当保留。</li><li>到手机检查设备列表。如果自己曾远程移除该电脑，重新关联属于预期操作。</li><li>如果没有主动操作却反复丢失会话，记录发生条件，例如重启浏览器后、运行清理工具后或切换浏览器资料后，再逐项比较。</li></ul>
+        <p><strong>成功标志：</strong>在符合你隐私选择的使用方式下，会话按预期保留或退出。共享电脑以主动退出为优先目标；长期个人使用可参考 <a href="/web-vs-desktop">网页版与桌面应用对比</a>。</p>
+        <h2 id="notifications">消息能看到，但没有声音或桌面提醒</h2>
+        <p>这通常需要分层检查，不应直接当作消息同步故障。先确认消息确实能在当前聊天中出现，再检查以下设置；如果消息本身都收不到，先回到同步部分。</p>
+        <ol><li>在 WhatsApp 中检查目标聊天是否静音，以及页面中的通知选项是否符合你的需要。</li><li>在浏览器地址栏的站点信息或网站权限中，检查 <strong>web.whatsapp.com</strong> 的通知权限；如果先前拒绝了通知，按需重新允许。</li><li>在电脑系统中检查浏览器的通知权限，以及勿扰、专注模式等可能影响提醒显示的设置。</li><li>需要声音时，检查标签页是否静音、系统音量和当前音频输出设备，再进行一次实际消息测试。</li></ol>
+        <p><strong>成功标志：</strong>在你希望接收提醒的场景中，一条新消息能按设置触发提醒。不同系统和浏览器的后台行为有差异；需要关闭消息预览或重新设置通知时，参考 <a href="/messages-files">消息、文件与通知指南</a>。</p>
+        <h2 id="files">文件发不出，或下载后找不到</h2>
+        <p>先分别判断“选择文件失败”“上传未完成”“下载被浏览器阻止”和“已经下载但找不到位置”。记录文件类型、大小与页面错误提示，按当前官方界面显示的限制处理；不要仅凭网上旧教程的固定数字判断。</p>
+        <ul><li>上传前确认本地文件可正常打开，并检查是否选中了正确版本；网络不稳时先用普通文本确认会话连接情况。</li><li>上传停滞时观察进度和报错，不要连续重复提交同一附件；必要时待连接恢复后再重试一次。</li><li>下载无反应时查看浏览器下载列表、保存位置和具体阻止原因；出现安全警告时先核对发送者与文件来源。</li><li>下载完成后到指定文件夹确认文件能打开。退出 WhatsApp 不会自动删除已经下载的附件，使用共享电脑时需要另行处理。</li></ul>
+        <h2 id="site-data">清理站点数据，放在排查的后面</h2>
+        <p>浏览器的缓存、Cookie、站点存储和下载文件不是同一件事。清理 Cookie 或其他站点数据可能使你退出登录，移除本地存储与偏好；只删除缓存也不代表一定解决会话问题。先确认手机可用于重新关联，并保留未发送文字、所需文件与错误信息。</p>
+        <p>如果前面的检查没有解决，并且决定尝试清理，可在浏览器设置中查找 <strong>web.whatsapp.com</strong> 对应站点的数据，仔细确认删除范围后再操作。避免一次清空所有网站数据，也不要勾选不相关的已保存密码。清理完成后重新打开官方页面并关联，按消息收发步骤验证结果。</p>
+        <p>以 Chrome 为例，<a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener noreferrer">官方帮助说明了按网站管理 Cookie 的方式</a>；不同浏览器的入口不同。这一步是处理当前浏览器状态的尝试，不能恢复已删除聊天，也不能解决账号限制。</p>
+        <h2 id="support">仍未解决：给官方支持一份可复现的信息</h2>
+        <p>进入 <a href="https://faq.whatsapp.com/" target="_blank" rel="noopener noreferrer">WhatsApp 官方帮助中心</a>，或使用应用中提供的帮助入口。提供具体发生过程，比只写“网页版不能用”更容易让对方判断问题。</p>
+        <ul><li>发生时间和时区，问题是否持续，最近一次正常使用的大致时间。</li><li>电脑系统、浏览器名称与版本，以及手机系统和 WhatsApp 版本。</li><li>页面的完整报错文字，问题出现在打开页面、扫描、同步还是附件操作阶段。</li><li>已经尝试的检查及其结果，例如换浏览器是否仍出现、手机是否能正常使用。</li><li>必要时提供遮住手机号、联系人、聊天内容和关联二维码的截图。</li></ul>
+        <p>不要在公开论坛或工单附件里提交短信验证码、两步验证 PIN、完整二维码或私人聊天。本站不提供账号解封、聊天恢复或远程代登录服务。</p>
+        <nav class="related-guides" aria-label="继续阅读"><h2>恢复后，继续熟悉日常操作</h2><ul><li><a href="/guide">重新关联与安全退出：从手机完成设备管理</a></li><li><a href="/messages-files">消息、文件与通知：常用功能操作说明</a></li><li><a href="/web-vs-desktop">网页版与桌面应用：按使用场景选择</a></li></ul></nav>
+        <aside class="source-list" aria-label="官方参考资料"><p><strong>参考资料与更新说明</strong></p><ul><li><a href="https://faq.whatsapp.com/1317564962315842/" target="_blank" rel="noopener noreferrer">WhatsApp 帮助中心：如何关联设备</a></li><li><a href="https://faq.whatsapp.com/1428782138011916/?cms_platform=web" target="_blank" rel="noopener noreferrer">WhatsApp 帮助中心：检查与移除关联设备</a></li><li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener noreferrer">Google Chrome 帮助：管理 Cookie 与站点数据</a></li><li><a href="https://support.google.com/chrome/answer/2392709" target="_blank" rel="noopener noreferrer">Google Chrome 帮助：清理浏览数据的影响</a></li><li><a href="https://support.google.com/chrome/answer/3220216" target="_blank" rel="noopener noreferrer">Google Chrome 帮助：网站通知权限</a></li></ul><p>本页于 2026 年 10 月 23 日整理。排查顺序为本站结合官方设备关联与浏览器帮助归纳的检查建议，不代表对某个账号、网络或设备的故障诊断；实际报错与官方最新说明优先。</p></aside>
+      </div>
+    </article>
+  </main>
+  <footer class="site-footer"><div class="container"><div class="footer-top"><div><a class="brand" href="/"><img src="/assets/whatsapp-icon.svg" width="31" height="31" alt="WhatsApp"><span class="brand-name">WhatsApp Web<small>网页版 · 独立中文指南</small></span></a><p class="footer-description">本网站为独立中文使用指南，与 WhatsApp 或 Meta 无隶属、授权或赞助关系。WhatsApp 名称及标志归其权利人所有。本站不提供账号登录或消息服务。</p></div><nav class="footer-links" aria-label="页脚导航"><a href="/#guides">指南目录</a><a href="/guide">使用教程</a><a href="/about">关于本站</a><a href="/privacy">隐私说明</a></nav></div><div class="footer-bottom"><span>© 2026 WhatsApp 网页版中文指南 · 内容核对于 2026 年 10 月 23 日</span><span>资料来源：<a href="https://www.whatsapp.com/" target="_blank" rel="noopener noreferrer">WhatsApp 官网</a> · <a href="https://faq.whatsapp.com/" target="_blank" rel="noopener noreferrer">官方帮助中心</a></span></div></div></footer>
+</body>
+</html>

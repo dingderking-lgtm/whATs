@@ -8,13 +8,16 @@
 
 | 地址 | 源文件 | 内容 |
 | --- | --- | --- |
-| `/` | `index.html` | 中文落地页、官方入口、功能介绍、使用步骤与常见问题 |
-| `/guide` | `guide.html` | 设备关联、常见问题与安全使用指南 |
+| `/` | `index.html` | 中文落地页、官方入口、主题指南导航、使用步骤与常见问题 |
+| `/guide` | `guide.html` | iPhone / Android 设备关联、登录确认、退出与安全使用指南 |
+| `/troubleshooting` | `troubleshooting.html` | 按症状排查二维码、关联、消息同步、文件与通知问题 |
+| `/messages-files` | `messages-files.html` | 消息、搜索、照片与文件、通知、通话的日常使用方法 |
+| `/web-vs-desktop` | `web-vs-desktop.html` | 网页版与桌面版的选择、使用场景和切换注意点 |
 | `/about` | `about.html` | 独立站定位、内容说明与参考来源 |
 | `/privacy` | `privacy.html` | 本站隐私说明及外部服务边界 |
 | 不存在的路径 | `404.html` | 自定义404页面，禁止索引 |
 
-`assets/` 存放本地图片、图标、样式和脚本。`scripts/` 是构建、验收、本地预览工具。构建会生成 `dist/robots.txt` 和 `dist/sitemap.xml`；404页面不会进入 Sitemap。
+共 8 个 HTML 页面，其中 7 个内容页可在正式构建中被索引。`assets/` 存放本地图片、图标、样式和脚本。`scripts/` 是构建、验收、本地预览工具。构建会生成 `dist/robots.txt` 和 `dist/sitemap.xml`；404页面不会进入 Sitemap。
 
 ## 本地运行
 
@@ -42,7 +45,7 @@ npm test
 2. 项目根目录选择本目录，Framework Preset 选择 **Other**；Node.js 选择 **22.x 或以上受支持版本**。
 3. 本项目的 `vercel.json` 已声明 **Build Command：`npm run build`**、**Output Directory：`dist`**、`cleanUrls: true`、`trailingSlash: false`。保留这些值，不要把输出目录改成源码根目录。
 4. 在 Vercel 项目环境变量设置中启用 **Enable access to System Environment Variables**。未设定 `SITE_URL` 时，构建会使用 `VERCEL_PROJECT_PRODUCTION_URL` 指定的稳定生产域名，例如项目的 `*.vercel.app`。它不使用每次变化的预览部署 URL。
-5. 点击 Deploy。打开生产网址，检查首页、`/guide`、`/about`、`/privacy`、`/sitemap.xml`、`/robots.txt`，并打开一个不存在的路径确认返回404。
+5. 点击 Deploy。打开生产网址，检查上表中的 7 个内容页，以及 `/sitemap.xml`、`/robots.txt`；再打开一个不存在的路径确认返回404。
 
 Vercel 配置和系统域名选择依据：[vercel.json 文档](https://vercel.com/docs/project-configuration/vercel-json)、[系统环境变量文档](https://vercel.com/docs/environment-variables/system-environment-variables#vercel_project_production_url)。未提供正式域名且无法读取 Vercel 系统域名时，构建会明确失败，避免把 localhost 写入线上 SEO 元数据。
 
@@ -61,7 +64,7 @@ Vercel 配置和系统域名选择依据：[vercel.json 文档](https://vercel.c
 
 本站包含可直接抓取的正文、各页独立 title/description、单一 H1、语义化 HTML、移动端适配、内部链接、canonical、Open Graph / Twitter 元信息、结构化数据、robots.txt 和 XML Sitemap。内容围绕用户实际使用问题组织，不使用关键词堆砌或虚构评分。canonical 是规范地址信号，搜索引擎仍会自行判断最终收录地址，参见 [Google canonical 说明](https://developers.google.com/search/docs/crawling-indexing/canonicalization)。
 
-正式构建的四个内容页允许索引；404和 Preview / Development / 自定义非生产环境构建为 `noindex`，预览 Sitemap 为空。预览 robots.txt 仍允许抓取，让爬虫能读取页面的 `noindex` 标签；`noindex` 不是访问权限控制。依据 [Google robots meta 规范](https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag)。
+正式构建的七个内容页允许索引；404和 Preview / Development / 自定义非生产环境构建为 `noindex`，预览 Sitemap 为空。预览 robots.txt 仍允许抓取，让爬虫能读取页面的 `noindex` 标签；`noindex` 不是访问权限控制。依据 [Google robots meta 规范](https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag)。
 
 ### 验证站点与提交 Sitemap
 

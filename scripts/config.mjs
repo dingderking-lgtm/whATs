@@ -5,6 +5,9 @@ export const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '
 export const pages = [
   { file: 'index.html', route: '/', indexable: true },
   { file: 'guide.html', route: '/guide', indexable: true },
+  { file: 'troubleshooting.html', route: '/troubleshooting', indexable: true },
+  { file: 'messages-files.html', route: '/messages-files', indexable: true },
+  { file: 'web-vs-desktop.html', route: '/web-vs-desktop', indexable: true },
   { file: 'about.html', route: '/about', indexable: true },
   { file: 'privacy.html', route: '/privacy', indexable: true },
   { file: '404.html', route: '/404', indexable: false },

@@ -7,9 +7,13 @@ root = Path(__file__).resolve().parent.parent
 release = root / 'release'
 release.mkdir(exist_ok=True)
 files = [root / name for name in [
-    'index.html', 'guide.html', 'about.html', 'privacy.html', '404.html',
+    'index.html', 'guide.html', 'troubleshooting.html', 'messages-files.html',
+    'web-vs-desktop.html', 'about.html', 'privacy.html', '404.html',
     'package.json', 'package-lock.json', 'vercel.json', '.gitignore', 'README.md',
 ]]
+for file in files:
+    if not file.is_file():
+        raise FileNotFoundError(f'Required release file is missing: {file}')
 files += sorted((root / 'assets').rglob('*'))
 files += sorted((root / 'scripts').rglob('*'))
 files += [root / 'docs' / name for name in ['sources.md', 'acceptance.md', 'render-social.py', 'package-release.py']]
